@@ -10,6 +10,10 @@ BATCH_SIZE = 128
 EPOCHS = 10
 LEARNING_RATE = 0.001
 
+ANNOTATIONS_FILE = "/Users/milindsoorya/datasets/UrbanSound8K/metadata/UrbanSound8K.csv"
+AUDIO_DIR = "/Users/milindsoorya/datasets/UrbanSound8K/audio"
+SAMPLE_RATE = 22050
+NUM_SAMPLES = 22050
 
 def train_one_epoch(model, data_loader, loss_fn, optimiser, device):
     for inputs, targets in data_loader:
@@ -36,11 +40,6 @@ def train(model, data_loader, loss_fn, optimiser, device, epochs):
 
 
 if __name__ == "__main__":
-    ANNOTATIONS_FILE = "/Users/milindsoorya/datasets/UrbanSound8K/metadata/UrbanSound8K.csv"
-    AUDIO_DIR = "/Users/milindsoorya/datasets/UrbanSound8K/audio"
-    SAMPLE_RATE = 22050
-    NUM_SAMPLES = 22050
-
     if torch.cuda.is_available():
         device = 'cuda'
     else:
@@ -70,5 +69,5 @@ if __name__ == "__main__":
     # train model
     train(cnn, train_data_loader, loss_fn, optimiser, device, EPOCHS)
 
-    torch.save(cnn.state_dict(), "cnnnet.pth")
-    print("Model trained and saved at cnnnet.pth")
+    torch.save(cnn.state_dict(), "cnn.pth")
+    print("Model trained and saved at cnn.pth")
